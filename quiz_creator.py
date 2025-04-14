@@ -1,17 +1,20 @@
 #initialization
 iteration = 1
 ask_exit = ""
+exit_decision = False
 
 #functions
 def exit():
+    global exit_decision
     #asking if continue
-        ask_exit = input("Exit?(Y/N):\n>").lower()
-        if ask_exit in ("y", "yes"):
-            return True
-        elif ask_exit in ("n", "no"):
-            return False
-        else:
-            exit()
+    ask_exit = input("Exit?(Y/N):\n>").lower()
+
+    if ask_exit in ("y", "yes", "exit"):
+        exit_decision = True
+    elif ask_exit in ("n", "no", "continue"):
+        exit_decision = False
+    else:
+        exit()
 
 #create file
 with open("quiz.txt", "a") as file:
@@ -39,9 +42,9 @@ with open("quiz.txt", "a") as file:
         correct_answer = input("Correct Answer:\n>")
         file.write("Correct Answer: " + correct_answer + "\n")
         
-        exit = exit()
+        exit()
 
-        if exit == True:
+        if exit_decision == True:
             break
             
              
