@@ -2,7 +2,6 @@ import os
 
 #initialization
 iteration = 1
-ask_exit = ""
 exit_decision = False
 
 #functions
@@ -17,6 +16,17 @@ def exit():
         exit_decision = False
     else:
         exit()
+
+def check_file():
+    global file_name
+    if os.path.exists(file_name):
+        ask_overwrite = input("The file name you choose already exist. Overwrite it?(Y/N):\n> ")
+        if ask_overwrite in ("y", "yes", "overwrite"):
+            os.remove(file_name)
+        elif ask_overwrite in ("n", "no"):
+            file_name = input("File Name:\n> ") + ".txt"
+            check_file()
+            
 
 #create file
 with open("temp.txt", "a") as file:
@@ -48,8 +58,9 @@ with open("temp.txt", "a") as file:
 
         if exit_decision == True:
             break
-        
+#create file name
     file_name = input("File Name:\n> ") + ".txt"
+    check_file()
 os.rename("temp.txt", file_name)
             
              
