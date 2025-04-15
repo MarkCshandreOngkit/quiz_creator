@@ -4,7 +4,7 @@ from tkinter import *
 #constants
 WINDOW_HEIGHT = 300
 WINDOW_WIDTH = 300
-SUBWINDOW_HEIGHT = 800
+SUBWINDOW_HEIGHT = 600
 SUBWINDOW_WIDTH = 800
 WINDOW_TITLE = "Quiz Creator"
 WINDOW_BACKGROUND = "#FFFFFF"
@@ -77,23 +77,60 @@ def create_quiz():
     os.rename("temp.txt", file_name)
 
 def create_quiz_creation_window():
+#create quiz writing window
     main_window.destroy()
     write_window = Tk()
     write_window.title(WINDOW_TITLE)
     write_window.resizable(False, False)
     write_window.config(bg=WINDOW_BACKGROUND)
 
+#centralizing window
     screen_position_x = int((screen_width / 2) - (SUBWINDOW_WIDTH / 2)) 
     screen_position_y = int((screen_height / 2) - (SUBWINDOW_HEIGHT / 2)) - 20
 
     write_window.geometry(f"{SUBWINDOW_WIDTH}x{SUBWINDOW_HEIGHT}+{screen_position_x}+{screen_position_y}")
 
+#inputs
+    quiz_problem_label = Label(write_window, text=f"Question {iteration}:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    quiz_problem_label.place(x=0, y=0)
+    quiz_problem = Text(font=("Arial", 15), width=72, height=4)
+    quiz_problem.place(x=0, y=30)
+    
+    answer_a_label = Label(write_window, text=f"Answer A:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    answer_a_label.place(x=0, y=130)
+    answer_a = Entry(font=("Arial", 15), width=72)
+    answer_a.place(x=0, y=160)
+
+    answer_b_label = Label(write_window, text=f"Answer B:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    answer_b_label.place(x=0, y=190)
+    answer_b = Entry(font=("Arial", 15), width=72)
+    answer_b.place(x=0, y=220)
+
+    answer_c_label = Label(write_window, text=f"Answer C:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    answer_c_label.place(x=0, y=250)
+    answer_c = Entry(font=("Arial", 15), width=72)
+    answer_c.place(x=0, y=290)
+
+    answer_d_label = Label(write_window, text=f"Answer D:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    answer_d_label.place(x=0, y=325)
+    answer_d = Entry(font=("Arial", 15), width=72)
+    answer_d.place(x=0, y=355)
+
+    correct_answer_label = Label(write_window, text=f"Correct Answer:", font=("Arial", 15, "bold"), bg="#FFFFFF")
+    correct_answer_label.place(x=0, y=385)
+    correct_answer = Entry(font=("Arial", 15), width=72)
+    correct_answer.place(x=0, y=415)
+    
+    write_window.mainloop()
+
+#interface window
 main_window = Tk()
 
 main_window.title(WINDOW_TITLE)
 main_window.resizable(False, False)
 main_window.config(bg=WINDOW_BACKGROUND)
 
+#process of centralizing window
 screen_width = main_window.winfo_screenwidth()
 screen_height = main_window.winfo_screenheight()
 
@@ -102,6 +139,7 @@ screen_position_y = int((screen_height / 2) - (WINDOW_HEIGHT / 2)) - 20
 
 main_window.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{screen_position_x}+{screen_position_y}")
 
+#buttons
 create_button = Button(main_window, text="Create New Quiz", command=create_quiz_creation_window)
 create_button.config(bg=BUTTON_COLOR, fg=TEXT_COLOR, relief=SUNKEN)
 create_button.config(font=("Arial", 20, "bold"))
