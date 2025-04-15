@@ -6,7 +6,8 @@ WINDOW_HEIGHT = 300
 WINDOW_WIDTH = 300
 WINDOW_TITLE = "Quiz Creator"
 WINDOW_BACKGROUND = "#FFFFFF"
-TEXT_COLOR = "#000000"
+BUTTON_COLOR = "#000000"
+TEXT_COLOR = "#FFFFFF"
 
 #initialization
 iteration = 1
@@ -73,30 +74,29 @@ def create_quiz():
         check_file()
     os.rename("temp.txt", file_name)
 
-window = Tk()
+main_window = Tk()
 
-window.title(WINDOW_TITLE)
-window.resizable(False, False)
+main_window.title(WINDOW_TITLE)
+main_window.resizable(False, False)
+main_window.config(bg=WINDOW_BACKGROUND)
 
-create_button = Button(window, text="Create New Quiz")
-create_button.config(command=create_quiz)
-create_button.config(font=("Arial", 25, "bold"))
-create_button.pack()
+screen_width = main_window.winfo_screenwidth()
+screen_height = main_window.winfo_screenheight()
 
-canvas = Canvas(window, bg=WINDOW_BACKGROUND, height=WINDOW_HEIGHT, width=WINDOW_WIDTH)
-canvas.pack()
+screen_position_x = int((screen_width / 2) - (WINDOW_WIDTH / 2)) 
+screen_position_y = int((screen_height / 2) - (WINDOW_HEIGHT / 2)) - 20
 
-window.update()
+main_window.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{screen_position_x}+{screen_position_y}")
 
-window_width = window.winfo_width()
-window_height = window.winfo_height()
-screen_width = window.winfo_screenwidth()
-screen_height = window.winfo_screenheight()
+create_button = Button(main_window, text="Create New Quiz", command=create_quiz)
+create_button.config(bg=BUTTON_COLOR, fg=TEXT_COLOR, relief=SUNKEN)
+create_button.config(font=("Arial", 20, "bold"))
+create_button.place(x=30, y=60)
 
-x_position = int((screen_width / 2) - (window_width / 2)) 
-y_position = int((screen_height / 2) - (window_height / 2)) - 20
+read_button = Button(main_window, text="Read Quiz File", command=create_quiz, state=DISABLED)
+read_button.config(bg=BUTTON_COLOR, fg=TEXT_COLOR, relief=SUNKEN)
+read_button.config(font=("Arial", 20, "bold"))
+read_button.place(x=40, y=180)
 
-window.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
-
-window.mainloop()
+main_window.mainloop()
              
