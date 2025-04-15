@@ -4,6 +4,8 @@ from tkinter import *
 #constants
 WINDOW_HEIGHT = 300
 WINDOW_WIDTH = 300
+SUBWINDOW_HEIGHT = 800
+SUBWINDOW_WIDTH = 800
 WINDOW_TITLE = "Quiz Creator"
 WINDOW_BACKGROUND = "#FFFFFF"
 BUTTON_COLOR = "#000000"
@@ -74,6 +76,18 @@ def create_quiz():
         check_file()
     os.rename("temp.txt", file_name)
 
+def create_quiz_creation_window():
+    main_window.destroy()
+    write_window = Tk()
+    write_window.title(WINDOW_TITLE)
+    write_window.resizable(False, False)
+    write_window.config(bg=WINDOW_BACKGROUND)
+
+    screen_position_x = int((screen_width / 2) - (SUBWINDOW_WIDTH / 2)) 
+    screen_position_y = int((screen_height / 2) - (SUBWINDOW_HEIGHT / 2)) - 20
+
+    write_window.geometry(f"{SUBWINDOW_WIDTH}x{SUBWINDOW_HEIGHT}+{screen_position_x}+{screen_position_y}")
+
 main_window = Tk()
 
 main_window.title(WINDOW_TITLE)
@@ -88,7 +102,7 @@ screen_position_y = int((screen_height / 2) - (WINDOW_HEIGHT / 2)) - 20
 
 main_window.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{screen_position_x}+{screen_position_y}")
 
-create_button = Button(main_window, text="Create New Quiz", command=create_quiz)
+create_button = Button(main_window, text="Create New Quiz", command=create_quiz_creation_window)
 create_button.config(bg=BUTTON_COLOR, fg=TEXT_COLOR, relief=SUNKEN)
 create_button.config(font=("Arial", 20, "bold"))
 create_button.place(x=30, y=60)
