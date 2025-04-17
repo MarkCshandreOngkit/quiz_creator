@@ -109,18 +109,17 @@ def main():
                 write_window.destroy()
                 save_quiz_file_creation_window()
             else:
+                write_window.destroy()
                 file_naming()
             
         def exit():
             global main_window_check, iteration
             #ask decision if exit
             if messagebox.askyesno(message="Do you want to exit the program?"):
-                write_window.destroy()
                 main_window.destroy()
             else:
                 main_window_check = True
                 iteration = 1
-                write_window.destroy()
                 main_window.deiconify()
 
         #hide main window
